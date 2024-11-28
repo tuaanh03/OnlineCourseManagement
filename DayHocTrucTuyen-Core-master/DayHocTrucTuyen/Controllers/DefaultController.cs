@@ -15,7 +15,7 @@ namespace DayHocTrucTuyen.Controllers
         //Trang chủ hệ thống
         [AllowAnonymous]
         [Route("{id?}", Name = "ShotLink"), Route("/default/index", Name = "default")]
-        public IActionResult Index(string? id)
+        public IActionResult Index(string? id)  
         {
             //Chuyển hướng khi có nhập ký tự
             if (!String.IsNullOrEmpty(id))
