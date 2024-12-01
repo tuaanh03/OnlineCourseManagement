@@ -7,6 +7,7 @@
 @using DayHocTrucTuyen.Models.Entities
 @model NguoiDung
 
+
 <section>
     <div class="gap2 gray-bg">
         <div class="container-fluid">
@@ -84,15 +85,15 @@
                                     </div>
                                 }
                             }
-                            @if(Model.MaLoai == "03" && !Model.hasPheDuyet())
+                            @if (Model.MaLoai == "03" && !Model.hasPheDuyet())
                             {
                                 <div class="state-teacher">
                                     <div class="central-meta">
                                         <div class="title-block">
                                             <div class="row">
-                                                <div class="w-100 text-right">
-                                                    <button class="custom-btn" onclick="getRegisTeacher()">Đăng ký giáo viên</button>
-                                                </div>
+                                                @*  <div class="w-100 text-right">
+                                            <button class="custom-btn" onclick="getRegisTeacher()">Đăng ký giáo viên</button>
+                                            </div> *@
                                             </div>
                                         </div>
                                     </div>
@@ -306,13 +307,13 @@
     </div>
 </div>
 
-@section ChildStyle{
+@section ChildStyle {
     <link href="~/Template/css/cropper.css" rel="stylesheet" asp-append-version="true">
     <link href="~/Template/bootstrap-table/bootstrap-table.min.css" rel="stylesheet" asp-append-version="true">
     <link href="~/Template/bootstrap-icons/bootstrap-icons.css" rel="stylesheet" asp-append-version="true">
 }
 
-@section ChildScript{
+@section ChildScript {
     <script src="~/Template/bootstrap/js/bootstrap.bundle.min.js" asp-append-version="true"></script>
     <script src="~/Template/bootstrap-table/tableExport.min.js" asp-append-version="true"></script>
     <script src="~/Template/bootstrap-table/bootstrap-table.min.js" asp-append-version="true"></script>

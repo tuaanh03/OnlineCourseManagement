@@ -144,6 +144,13 @@ namespace DayHocTrucTuyen.Models.Entities
             List<Tag> tags = (from t in db.Tags
                               join ltt in db.LopThuocTags on t.MaTag equals ltt.MaTag
                               where ltt.MaLop == this.MaLop
+                              select t).Distinct().ToList();
+            return tags;
+        }
+        public List<Tag> getTagName()
+        {
+            List<Tag> tags = (from t in db.Tags
+
                               select t).ToList();
             return tags;
         }

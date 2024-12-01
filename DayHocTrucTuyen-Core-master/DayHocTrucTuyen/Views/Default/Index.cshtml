@@ -111,72 +111,104 @@
     <section id="features" class="features">
         <div class="container" data-aos="fade-up">
             <div class="row" data-aos="zoom-in" data-aos-delay="100">
-                <div class="col-lg-3 col-md-4">
-                    <div class="icon-box">
-                        <i class="ri-file-code-fill" style="color: #ffbb2c;"></i>
-                        <h3><a href="">Thiết kế web</a></h3>
-                    </div>
+
+
+
+                @foreach (var room in ViewData["Room"] as List<LopHoc>)
+
+                {
+                    @foreach (var t in room.getTagName())
+                    {
+                        <div class="col-lg-3 col-md-4 mt-4 mt-md-0" style="padding:10px;">
+                            <a href="#" style="color:#000">
+                                <div class="icon-box">
+                                    <i class="ri"></i>
+                                    <h3><a href="">@t.TenTag</a></h3>
+                                </div>
+                            </a>
+                        </div>
+
+                    }
+
+                    break;
+                }
+                @*  @foreach (var tag in ViewData["Tags"] as List<Tag>)
+
+                {
+                <div class="col-lg-3 col-md-4 mt-4 mt-md-0" style="padding:10px;">
+                <a href="#" style="color:#000">
+                <div class="icon-box">
+                <i class="ri"></i>
+                <h3><a href="">@tag.TenTag</a></h3>  <!-- Hiển thị tên Tag -->
                 </div>
-                <div class="col-lg-3 col-md-4 mt-4 mt-md-0">
-                    <div class="icon-box">
-                        <i class="ri-file-code-line" style="color: #5578ff;"></i>
-                        <h3><a href="">Lập trình .Net</a></h3>
-                    </div>
+                </a>
                 </div>
-                <div class="col-lg-3 col-md-4 mt-4 mt-md-0">
-                    <div class="icon-box">
-                        <i class="ri-database-2-fill" style="color: #e80368;"></i>
-                        <h3><a href="">Cơ sở dữ liệu</a></h3>
-                    </div>
+                }
+                *@
+                @*     <div class="col-lg-3 col-md-4 mt-4 mt-md-0">
+                <a href="#"  style="color:#000">
+                <div class="icon-box">
+                <i class="ri-file-code-line" ></i>
+                <h3><a href="">Lập trình .Net</a></h3>
+                </div>
+                </a>
+                </div>
+                *@
+
+                @*  <div class="col-lg-3 col-md-4 mt-4 mt-md-0">
+                <div class="icon-box">
+                <i class="ri-database-2-fill" style="color: #e80368;"></i>
+                <h3><a href="">Cơ sở dữ liệu</a></h3>
+                </div>
                 </div>
                 <div class="col-lg-3 col-md-4 mt-4 mt-lg-0">
-                    <div class="icon-box">
-                        <i class="ri-dashboard-fill" style="color: #e361ff;"></i>
-                        <h3><a href="">Quản trị hệ thống</a></h3>
-                    </div>
+                <div class="icon-box">
+                <i class="ri-dashboard-fill" style="color: #e361ff;"></i>
+                <h3><a href="">Quản trị hệ thống</a></h3>
+                </div>
                 </div>
                 <div class="col-lg-3 col-md-4 mt-4">
-                    <div class="icon-box">
-                        <i class="ri-line-chart-fill" style="color: #47aeff;"></i>
-                        <h3><a href="">Lý thuyết đồ thị</a></h3>
-                    </div>
+                <div class="icon-box">
+                <i class="ri-line-chart-fill" style="color: #47aeff;"></i>
+                <h3><a href="">Lý thuyết đồ thị</a></h3>
+                </div>
                 </div>
                 <div class="col-lg-3 col-md-4 mt-4">
-                    <div class="icon-box">
-                        <i class="ri-html5-fill" style="color: #ffa76e;"></i>
-                        <h3><a href="">HTML</a></h3>
-                    </div>
+                <div class="icon-box">
+                <i class="ri-html5-fill" style="color: #ffa76e;"></i>
+                <h3><a href="">HTML</a></h3>
+                </div>
                 </div>
                 <div class="col-lg-3 col-md-4 mt-4">
-                    <div class="icon-box">
-                        <i class="ri-css3-fill" style="color: #11dbcf;"></i>
-                        <h3><a href="">CSS</a></h3>
-                    </div>
+                <div class="icon-box">
+                <i class="ri-css3-fill" style="color: #11dbcf;"></i>
+                <h3><a href="">CSS</a></h3>
+                </div>
                 </div>
                 <div class="col-lg-3 col-md-4 mt-4">
-                    <div class="icon-box">
-                        <i class="ri-align-justify" style="color: #4233ff;"></i>
-                        <h3><a href="">Java Script</a></h3>
-                    </div>
+                <div class="icon-box">
+                <i class="ri-align-justify" style="color: #4233ff;"></i>
+                <h3><a href="">Java Script</a></h3>
+                </div>
                 </div>
                 <div class="col-lg-3 col-md-4 mt-4">
-                    <div class="icon-box">
-                        <i class="ri-mail-lock-line" style="color: #b2904f;"></i>
-                        <h3><a href="">Bảo mật</a></h3>
-                    </div>
+                <div class="icon-box">
+                <i class="ri-mail-lock-line" style="color: #b2904f;"></i>
+                <h3><a href="">Bảo mật</a></h3>
+                </div>
                 </div>
                 <div class="col-lg-3 col-md-4 mt-4">
-                    <div class="icon-box">
-                        <i class="ri-psychotherapy-fill" style="color: #b20969;"></i>
-                        <h3><a href="">Trí tuệ nhân tạo</a></h3>
-                    </div>
+                <div class="icon-box">
+                <i class="ri-psychotherapy-fill" style="color: #b20969;"></i>
+                <h3><a href="">Trí tuệ nhân tạo</a></h3>
+                </div>
                 </div>
                 <div class="col-lg-3 col-md-4 mt-4">
-                    <div class="icon-box">
-                        <i class="ri-music-2-fill" style="color: #ff5828;"></i>
-                        <h3><a href="">Âm nhạc</a></h3>
-                    </div>
+                <div class="icon-box">
+                <i class="ri-music-2-fill" style="color: #ff5828;"></i>
+                <h3><a href="">Âm nhạc</a></h3>
                 </div>
+                </div> *@
             </div>
         </div>
     </section><!-- End Features Section -->

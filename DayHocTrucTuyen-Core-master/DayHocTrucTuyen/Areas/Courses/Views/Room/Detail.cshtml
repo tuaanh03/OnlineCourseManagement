@@ -1,5 +1,4 @@
-﻿
-@{
+﻿@{
     ViewBag.Title = Model.TenLop;
     ViewBag.Main = Model.TenLop;
     Layout = "~/Views/Shared/_LayoutArea.cshtml";
@@ -19,7 +18,9 @@
                     <div class="employer-info">
                         <h2 id="viewroom-Name" title="@Model.MaLop"><b>@Model.TenLop</b></h2>
                         <i>@Model.getMembers() thành viên</i>
-                        @{ var userOwner = Model.getOwner(); }
+                        @{
+                            var userOwner = Model.getOwner();
+                        }
                         <h4><a href="~/profile/info/@userOwner.MaNd">@userOwner.getFullName()</a> là giáo viên</h4>
                     </div>
                 </div>
@@ -36,7 +37,8 @@
                         }
                         else if (!Model.isOwner(uLogin.MaNd))
                         {
-                            <button data-roomcode="@Model.MaLop" class="leave-room"><i class="fa fa-sign-out"></i> Rời khỏi lớp</button>
+                            @*   <button data-roomcode="@Model.MaLop" class="leave-room"><i class="fa fa-sign-out"></i> Đã tham gia</button> *@
+                            <p data-roomcode="@Model.MaLop" class="leave-room"><i class="fa fa-sign-out"></i> Đã tham gia</p>
                         }
                     </div>
                 </div>
@@ -46,7 +48,8 @@
 </section>
 
 <!-- Thông báo nếu lớp học ngừng hoạt động -->
-@if(!Model.TrangThai){
+@if (!Model.TrangThai)
+{
     <section>
         <div class="pt-4 gray-bg">
             <div class="container-fluid">
@@ -152,9 +155,13 @@ else
                                                         <div class="friend-name">
                                                             <div class="more">
                                                                 @if (post.isGhim())
-                                                                {<i class="bx bx-pin post-pin active" data-toggle="tooltip" title="Bài viết được ghim đầu trang"></i>}
+                                                                {
+                                                                    <i class="bx bx-pin post-pin active" data-toggle="tooltip" title="Bài viết được ghim đầu trang"></i>
+                                                                }
                                                                 else
-                                                                { <i class="bx bx-pin post-pin" data-toggle="tooltip" title="Bài viết được ghim đầu trang"></i>}
+                                                                {
+                                                                    <i class="bx bx-pin post-pin" data-toggle="tooltip" title="Bài viết được ghim đầu trang"></i>
+                                                                }
                                                                 <!-- Nếu lớp học hoạt động thì có thể tương tác-->
                                                                 @if (Model.TrangThai)
                                                                 {
@@ -433,9 +440,13 @@ else
                                                                 <ul>
                                                                     <li>
                                                                         @if (post.liked(uLogin.MaNd))
-                                                                        {<div id="@post.MaBai" class="likes heart liked" title="Yêu thích" onclick="likePost('@post.MaBai', '@uLogin.MaNd')">❤ <span>@post.getSLCamXuc()</span></div>}
-                                                                    else
-                                                                    { <div id="@post.MaBai" class="likes heart" title="Yêu thích" onclick="likePost('@post.MaBai', '@uLogin.MaNd')">❤ <span>@post.getSLCamXuc()</span></div>}
+                                                                        {
+                                                                            <div id="@post.MaBai" class="likes heart liked" title="Yêu thích" onclick="likePost('@post.MaBai', '@uLogin.MaNd')">❤ <span>@post.getSLCamXuc()</span></div>
+                                                                        }
+                                                                        else
+                                                                        {
+                                                                            <div id="@post.MaBai" class="likes heart" title="Yêu thích" onclick="likePost('@post.MaBai', '@uLogin.MaNd')">❤ <span>@post.getSLCamXuc()</span></div>
+                                                                        }
                                                                     </li>
                                                                     <li>
                                                                         <span class="comment" title="Bình luận">
@@ -499,9 +510,13 @@ else
                                                                                         <span class="timeago" style="text-transform: none" title="@bl.ThoiGian.ToString("yyyy-MM-dd'T'HH:mm:ss")">@bl.ThoiGian.ToString()</span>
                                                                                         <a class="we-reply" title="Trả lời">Trả lời</a>
                                                                                         @if (bl.MaNd.Equals(uLogin.MaNd))
-                                                                                        {<a title="Xóa bình luận" data-toggle="modal" data-target="#confirmDeleteComment" onclick="setComment(this, '@bl.MaBai', '@bl.ThoiGian.ToString()')">Xóa</a>}
+                                                                                        {
+                                                                                            <a title="Xóa bình luận" data-toggle="modal" data-target="#confirmDeleteComment" onclick="setComment(this, '@bl.MaBai', '@bl.ThoiGian.ToString()')">Xóa</a>
+                                                                                        }
                                                                                         else
-                                                                                        { <a class="rpt-comment" title="Báo cáo">Báo cáo</a>}
+                                                                                        {
+                                                                                            <a class="rpt-comment" title="Báo cáo">Báo cáo</a>
+                                                                                        }
                                                                                     </div>
                                                                                 </div>
                                                                             </li>
@@ -556,11 +571,13 @@ else
                 </div>
             </div>
         </div>
-    </section><!-- content -->
+    </section>
+
+    <!-- content -->
 }
 
 <!-- Đề xuất khóa học -->
-<section>
+@* <section>
     <div class="gap2 gray-bg">
         <div class="container-fluid">
             <div class="row">
@@ -594,7 +611,7 @@ else
         </div>
     </div>
 </section>
-
+ *@
 <!--Popup xem hoặc tải pdf-->
 <div class="modal fade" id="myChoosePDF">
     <div class="modal-dialog">
@@ -981,11 +998,11 @@ else
     </div>
 </div>
 
-@section ChildStyle{
+@section ChildStyle {
     <link rel="stylesheet" href="~/Template/css/rating.css" asp-append-version="true" />
 }
 
-@section ChildScript{
+@section ChildScript {
     <script src="~/Template/js/echarts.min.js" asp-append-version="true"></script>
     <script src="~/Template/js/custom_statistic.js" asp-append-version="true"></script>
 }

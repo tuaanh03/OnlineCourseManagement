@@ -1,5 +1,4 @@
-﻿
-@{
+﻿@{
     Layout = null;
 
     var maUser = User.Claims.First().Value;
@@ -35,12 +34,12 @@
 
     <!--Toastr thông báo-->
     <link rel="stylesheet" href="~/Template/css/toastr.css" asp-append-version="true" />
-    
+
     <!-- Gợi ý và tự động điền cho form-->
     <link rel="stylesheet" href="~/Template/css/search-room.css" asp-append-version="true" />
 
     <!-- style nhận về từ các cshtlm con -->
-    @RenderSection("ChildStyle", required:false)
+    @RenderSection("ChildStyle", required: false)
 </head>
 <body>
     <!-- Loading animation -->
@@ -69,9 +68,9 @@
                             {
                                 <li>Bạn chưa tham gia lớp học nào!</li>
                             }
-                            else 
+                            else
                             {
-                                foreach(var r in userAccount.getListJoin())
+                                foreach (var r in userAccount.getListJoin())
                                 {
                                     <li class="ml-2 mr-2 mt-1 mb-1">
                                         <ins class="mesg-meta mobi-msg">
@@ -143,66 +142,66 @@
                             </div>
                         }
                     </li>
+                    @*  <li>
+                    @if(thongbao.getSLThongBaoChuaXem() == 0)
+                    {
+                    <a href="#" title="Thông báo" data-ripple="">
+                    <i class="fa fa-bell"></i>
+                    </a>
+                    <div class="dropdowns">
+                    <span>Hiện không có thông báo mới nào!</span>
+                    <a href="~/user/notification/detail" title="Danh sách thông báo" class="more-mesg">Xem tất cả</a>
+                    </div>
+                    }
+                    else
+                    {
+                    <a href="#" title="Thông báo" data-ripple="">
+                    <i class="fa fa-bell"></i><em id="dot-thong-bao" class="bg-red">@thongbao.getSLThongBaoChuaXem()</em>
+                    </a>
+                    <div class="dropdowns">
+                    <span>@thongbao.getSLThongBaoChuaXem() thông báo mới <a href="" title="" onclick="setXemTatCaThongBao('@maUser')">Đã xem hết</a></span>
+                    <ul class="drops-menu">
+                    @foreach (var tb in thongbao.getThongBaoChuaXem())
+                    {
                     <li>
-                        @if(thongbao.getSLThongBaoChuaXem() == 0)
-                        {
-                            <a href="#" title="Thông báo" data-ripple="">
-                                <i class="fa fa-bell"></i>
-                            </a>
-                            <div class="dropdowns">
-                                <span>Hiện không có thông báo mới nào!</span>
-                                <a href="~/user/notification/detail" title="Danh sách thông báo" class="more-mesg">Xem tất cả</a>
-                            </div>
-                        }
-                        else 
-                        {
-                            <a href="#" title="Thông báo" data-ripple="">
-                                <i class="fa fa-bell"></i><em id="dot-thong-bao" class="bg-red">@thongbao.getSLThongBaoChuaXem()</em>
-                            </a>
-                            <div class="dropdowns">
-                                <span>@thongbao.getSLThongBaoChuaXem() thông báo mới <a href="" title="" onclick="setXemTatCaThongBao('@maUser')">Đã xem hết</a></span>
-                                <ul class="drops-menu">
-                                    @foreach (var tb in thongbao.getThongBaoChuaXem())
-                                    {
-                                        <li>
-                                            <a href="@tb.getLienKet()" title="" onclick="setDaXemThongBao('@tb.MaTb', '@tb.MaNd')">
-                                                <figure>
-                                                    <img class="wh-35" src="~/@tb.getIconImg()" alt="" />
-                                                </figure>
-                                                <div class="mesg-meta">
-                                                    <h6>@tb.TieuDe</h6>
-                                                    <span>@tb.NoiDung</span>
-                                                    <i class="timeago" title="@tb.ThoiGian.ToString("yyyy-MM-dd'T'HH:mm:ss")">@tb.ThoiGian.ToString()</i>
-                                                </div>
-                                            </a>
-                                        </li>
-                                    }
-                                </ul>
-                                <a href="~/user/notification/detail" title="Danh sách thông báo" class="more-mesg">Xem tất cả</a>
-                            </div>
-                        }
+                    <a href="@tb.getLienKet()" title="" onclick="setDaXemThongBao('@tb.MaTb', '@tb.MaNd')">
+                    <figure>
+                    <img class="wh-35" src="~/@tb.getIconImg()" alt="" />
+                    </figure>
+                    <div class="mesg-meta">
+                    <h6>@tb.TieuDe</h6>
+                    <span>@tb.NoiDung</span>
+                    <i class="timeago" title="@tb.ThoiGian.ToString("yyyy-MM-dd'T'HH:mm:ss")">@tb.ThoiGian.ToString()</i>
+                    </div>
+                    </a>
                     </li>
-                    <li>
-                        <a href="#" title="Tin nhắn" data-ripple="" id="icon-tin-nhan">
-                            <i class="fa fa-commenting"></i><em id="dot-tin-nhan" class="bg-blue">0</em>
-                        </a>
-                        <div class="dropdowns">
-                            <span><span class="sl-ping-mess">0</span> tin nhắn mới <a href="" title="" onclick="setXemTatCaTinNhan('@maUser')">Đã xem hết</a></span>
-                            <ul class="drops-menu" id="menu-ping-mess"></ul>
-                            <a href="~/user/mess/detail" title="Danh sách tin nhắn" class="more-mesg">Xem tất cả</a>
-                        </div>
-                    </li>
-                    <li>
-                        <a href="#" title="Trợ giúp" data-ripple=""><i class="fa fa-question-circle"></i></a>
-                        <div class="dropdowns helps">
-                            <span>Bạn cần giúp gì?</span>
-                            <ul class="help-drop">
-                                <li><a href="" title=""><i class="fa fa-book"></i>Lớp học và phòng thi</a></li>
-                                <li><a href="" title=""><i class="fa fa-exclamation-triangle"></i>Phản hồi và báo cáo</a></li>
-                                <li><a href="" title=""><i class="fa fa-question-circle-o"></i>Câu hỏi khác</a></li>
-                            </ul>
-                        </div>
-                    </li>
+                    }
+                    </ul>
+                    <a href="~/user/notification/detail" title="Danh sách thông báo" class="more-mesg">Xem tất cả</a>
+                    </div>
+                    }
+                    </li> *@
+                    @*   <li>
+                    <a href="#" title="Tin nhắn" data-ripple="" id="icon-tin-nhan">
+                    <i class="fa fa-commenting"></i><em id="dot-tin-nhan" class="bg-blue">0</em>
+                    </a>
+                    <div class="dropdowns">
+                    <span><span class="sl-ping-mess">0</span> tin nhắn mới <a href="" title="" onclick="setXemTatCaTinNhan('@maUser')">Đã xem hết</a></span>
+                    <ul class="drops-menu" id="menu-ping-mess"></ul>
+                    <a href="~/user/mess/detail" title="Danh sách tin nhắn" class="more-mesg">Xem tất cả</a>
+                    </div>
+                    </li> *@
+                    @*  <li>
+                    <a href="#" title="Trợ giúp" data-ripple=""><i class="fa fa-question-circle"></i></a>
+                    <div class="dropdowns helps">
+                    <span>Bạn cần giúp gì?</span>
+                    <ul class="help-drop">
+                    <li><a href="" title=""><i class="fa fa-book"></i>Lớp học và phòng thi</a></li>
+                    <li><a href="" title=""><i class="fa fa-exclamation-triangle"></i>Phản hồi và báo cáo</a></li>
+                    <li><a href="" title=""><i class="fa fa-question-circle-o"></i>Câu hỏi khác</a></li>
+                    </ul>
+                    </div>
+                    </li> *@
                 </ul>
                 <div class="user-img">
                     <h5>@userAccount.getFullName()</h5>
@@ -215,7 +214,7 @@
                             {
                                 <li><a href="/admin/user/list" title=""><i class="ti-view-grid"></i> QL người dùng</a></li>
                             }
-                            <li><a href="/user/manage/index" title=""><i class="ti-view-grid"></i> Trang quản trị</a></li>
+                            @* <li><a href="/user/manage/index" title=""><i class="ti-view-grid"></i> Trang quản trị</a></li> *@
                             <li><a href="/profile/update" title=""><i class="ti-pencil-alt"></i>Chỉnh sửa thông tin</a></li>
                             <li class="change-pass"><a href="javascript:void(0)" title=""><i class="ti-key"></i>Đổi mật khẩu</a></li>
                             <li><a href="javascript:void(0)" title="" onclick="dangxuat()"><i class="ti-power-off"></i>Đăng xuất</a></li>
@@ -237,7 +236,7 @@
                             <li>Xóa hết tin</li>
                         </ul>
                     </div>
-                    <span title="Tạm ẩn chat" class="temp-hide-chat" ><i class="ti-angle-down"></i></span>
+                    <span title="Tạm ẩn chat" class="temp-hide-chat"><i class="ti-angle-down"></i></span>
                     <span title="Tắt chat" class="close-mesage"><i class="ti-close"></i></span>
                 </div>
             </div>
@@ -364,7 +363,7 @@
     <script src="~/Template/js/chat.js" asp-append-version="true"></script>
 
     <!-- Các section có trong view -->
-    @RenderSection("ChildScript", required:false)
+    @RenderSection("ChildScript", required: false)
     <script src="~/Template/js/script.js" asp-append-version="true"></script>
 </body>
 </html>

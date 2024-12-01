@@ -2,11 +2,18 @@
 @using DayHocTrucTuyen.Models.Entities
 @{
     Layout = null;
+
+
+    string maUser;
     NguoiDung uLogin = new NguoiDung();
     if (User.Identity != null && User.Identity.IsAuthenticated)
     {
-        uLogin = new NguoiDung().getNguoiDung(User.Claims.First().Value);
+        maUser = User.Claims.First().Value;
+
+        uLogin = new NguoiDung().getNguoiDung(maUser);
+        NguoiDung userAccount = new NguoiDung().getNguoiDung(maUser);
     }
+
 }
 
 <!DOCTYPE html>
@@ -102,7 +109,12 @@
                                 {
                                     <a href="~/admin/user/list" class="dropdown-item"><i class="bi bi-grid"> Admin</i></a>
                                 }
-                                <a href="~/user/manage/index" class="dropdown-item"><i class="bi bi-grid"> Trang quản trị</i></a>
+                                @* <a href="~/user/manage/index" class="dropdown-item"><i class="bi bi-grid"> Trang quản trị</i></a> *@
+                                <a href="/profile/info/@User.Claims.First().Value" class="dropdown-item"><i class="bi bi-grid">  Trang của tôi</i></a>
+                                <a href="/profile/update" title="" class="dropdown-item"><i class="ti-pencil-alt"></i>Chỉnh sửa thông tin</a>
+                                <a href="javascript:void(0)" title="" class="dropdown-item"><i class="ti-pencil-alt"></i>Đổi mật khẩu</a>
+                                @* <li><a href="/profile/info/@maUser" title=""><i class="ti-user"></i> Trang của tôi</a></li> *@
+                                @* <li class="change-pass"><a href="javascript:void(0)" title=""><i class="ti-key"></i>Đổi mật khẩu</a></li> *@
                                 <button type="button" id="logoutAccount" class="dropdown-item text-danger" onclick="dangxuat()"><i class="bi bi-power"> Đăng xuất</i></button>
                             </li>
                         </ul>
@@ -111,7 +123,6 @@
             </div>
         </div>
     </header><!-- End Header -->
-
     <!-- popup record micro -->
     <div class="call-wraper">
         <div class="m-live-call">
@@ -148,7 +159,6 @@
             </div>
         </div>
     </footer><!-- End Footer -->
-
     <!-- Vendor JS Files -->
     <script src="~/Template/js/purecounter.js" asp-append-version="true"></script>
     <script src="~/Template/aos/aos.js" asp-append-version="true"></script>
@@ -163,6 +173,7 @@
     <script src="~/Template/js/toastr.js" asp-append-version="true"></script>
 
     <!-- Các section có trong view -->
-    @RenderSection("ChildScript", required:false)
+    @RenderSection("ChildScript", required: false)
+    <script src="~/Template/js/script.js" asp-append-version="true"></script>
 </body>
 </html>
