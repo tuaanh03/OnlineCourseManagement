@@ -1,18 +1,31 @@
 ﻿using DayHocTrucTuyen.Areas.Admin.Models;
 using DayHocTrucTuyen.Areas.User.Controllers;
+using DayHocTrucTuyen.Models;
 using DayHocTrucTuyen.Models.Entities;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 
+
 namespace DayHocTrucTuyen.Areas.Admin.Controllers
 {
-    [Area(nameof(Admin))]
+    [Area("Admin")]
     [Route("admin/[controller]/[action]/{id?}")]
     [Authorize(Roles = "01")]
     public class UserController : Controller
     {
         DayHocTrucTuyenContext db = new DayHocTrucTuyenContext();
+
+        [AllowAnonymous]
+        public ActionResult Login(string? ReturnUrl)
+        {
+            LoginModel loginModel = new LoginModel();
+            loginModel.ReturnUrl = string.IsNullOrEmpty(ReturnUrl) ? "/admin/user/list" : ReturnUrl;
+            ViewBag.members = db.NguoiDungs.Count();
+            ViewBag.classroom = db.LopHocs.Count();
+            return View(loginModel);
+        }
+
 
         #region Quản lý người dùng
         //Trang danh sách người dùng

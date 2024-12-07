@@ -81,17 +81,17 @@
                                             <i class="ti-layout-list-thumb"></i>
                                             <a href="~/courses/room/list" title="">Danh sách lớp học</a>
                                         </li>
-                                        <li>
+                                        @* <li>
                                             <i class="ti-comment-alt"></i>
                                             <a href="" title="">Tin nhắn</a>
                                         </li>
                                         <li>
                                             <i class="ti-bell"></i>
                                             <a href="~/user/notification/detail" title="">Thông báo</a>
-                                        </li>
+                                        </li> *@
                                     </ul>
                                 </div><!-- Thao tác nhanh -->
-                                <div class="widget">
+                                @* <div class="widget">
                                     <h4 class="widget-title">Xem thêm</h4>
                                     <ul class="naves">
                                         <li>
@@ -107,7 +107,7 @@
                                             <a onclick="dangxuat()" href="#" title="">Đăng xuất</a>
                                         </li>
                                     </ul>
-                                </div><!-- Xem thêm -->
+                                </div><!-- Xem thêm --> *@
                             </aside>
                         </div><!-- Thanh trái -->
                         <div class="col-lg-6">
@@ -178,7 +178,7 @@
                         </div><!-- nội dung giữa -->
                         
                         <!-- Menu right-->
-                        @await Html.PartialAsync("~/Views/Shared/Menu/_ViewLike.cshtml", Model)
+                        @* @await Html.PartialAsync("~/Views/Shared/Menu/_ViewLike.cshtml", Model) *@
 
                     </div>
                 </div>

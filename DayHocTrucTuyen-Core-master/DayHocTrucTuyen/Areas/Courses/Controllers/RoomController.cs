@@ -95,7 +95,6 @@ namespace DayHocTrucTuyen.Areas.Courses.Controllers
         {
             var maUser = User.Claims.First().Value;
             LopHoc newLop = new LopHoc();
-
             newLop.MaLop = newLop.setMa();
             newLop.MaNd = maUser;
             newLop.NgayTao = DateTime.Now;
@@ -254,7 +253,7 @@ namespace DayHocTrucTuyen.Areas.Courses.Controllers
             var lp = db.LopHocs.FirstOrDefault(x => x.MaLop == maLop);
             if(lp != null)
             {
-                //Nếu giá tiền của lớp lớn hơn 0 thì tiến hành kiểm tra và thanh toán
+                /*//Nếu giá tiền của lớp lớn hơn 0 thì tiến hành kiểm tra và thanh toán
                 if(lp.GiaTien > 0)
                 {
                     ViController vinguoidung = new ViController();
@@ -279,7 +278,7 @@ namespace DayHocTrucTuyen.Areas.Courses.Controllers
                         var tempSoTien = lp.GiaTien - lp.GiaTien * 10 / 100;
                         vinguoidung.setThayDoiSoDu(gv.MaNd, true, tempSoTien, "Thu từ học sinh tham gia lớp: " + lp.TenLop);
                     }
-                }
+                }*/
 
                 //Thêm người dùng vào lớp
                 HocSinhThuocLop hs = new HocSinhThuocLop();

@@ -66,7 +66,7 @@ function dangnhap() {
 //Hàm đăng xuất
 function dangxuat() {
     $.getJSON('/account/logout', function (data) {
-        location.replace('/account/login');
+        location.replace('/admin/user/login');
     })
 }
 

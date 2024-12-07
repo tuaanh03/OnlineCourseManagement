@@ -143,7 +143,7 @@
                             </div>
                         }
                     </li>
-                    <li>
+                    @* <li>
                         @if(thongbao.getSLThongBaoChuaXem() == 0)
                         {
                             <a href="#" title="Thông báo" data-ripple="">
@@ -202,7 +202,7 @@
                                 <li><a href="" title=""><i class="fa fa-question-circle-o"></i>Câu hỏi khác</a></li>
                             </ul>
                         </div>
-                    </li>
+                    </li> *@
                 </ul>
                 <div class="user-img">
                     <h5>@userAccount.getFullName()</h5>
@@ -210,15 +210,21 @@
                     <span class="status f-online"></span>
                     <div class="user-setting">
                         <ul class="log-out">
-                            <li><a href="/profile/info/@maUser" title=""><i class="ti-user"></i> Trang của tôi</a></li>
+                            <li><a href="/profile/info/@maUser" title=""><i class="ti-user"></i>Thông tin cá nhân</a></li>
                             @if (userAccount.MaLoai != null && userAccount.MaLoai.Equals("01"))
                             {
                                 <li><a href="/admin/user/list" title=""><i class="ti-view-grid"></i> QL người dùng</a></li>
-                            }
-                            <li><a href="/user/manage/index" title=""><i class="ti-view-grid"></i> Trang quản trị</a></li>
+                            }      
                             <li><a href="/profile/update" title=""><i class="ti-pencil-alt"></i>Chỉnh sửa thông tin</a></li>
                             <li class="change-pass"><a href="javascript:void(0)" title=""><i class="ti-key"></i>Đổi mật khẩu</a></li>
-                            <li><a href="javascript:void(0)" title="" onclick="dangxuat()"><i class="ti-power-off"></i>Đăng xuất</a></li>
+                            @if (userAccount.MaLoai != null && userAccount.MaLoai.Equals("01"))
+                            {
+                                <li><a href="javascript:void(0)" title="" onclick="dangxuatadmin()"><i class="ti-power-off"></i>Đăng xuất</a></li>
+                            }
+                            else
+                            {
+                                <li><a href="javascript:void(0)" title="" onclick="dangxuat()"><i class="ti-power-off"></i>Đăng xuất</a></li>
+                            }
                         </ul>
                     </div>
                 </div>
@@ -329,15 +335,15 @@
         <footer id="footer">
             <div class="container d-md-flex py-4">
                 <div class="me-md-auto text-center text-md-start">
-                    <b>Triệu Nguyễn Khánh Băng</b>
+                    <b>CLB Học Thuật</b>
                     <br />
                     B1809328
                 </div>
                 <div class="social-links text-center text-md-right pt-3 pt-md-0">
-                    <a href="https://instagram.com/tnk_bang" class="instagram"><i class="bx bxl-instagram"></i></a>
-                    <a href="https://fb.com/tnkbang" class="facebook"><i class="bx bxl-facebook"></i></a>
-                    <a href="https://m.me/tnkbang" class="messenger"><i class="bx bxl-messenger"></i></a>
-                    <a href="mailto:bangb1809328@student.ctu.edu.vn" class="google-plus"><i class="bx bx-mail-send"></i></a>
+                    <a href="#" class="instagram"><i class="bx bxl-instagram"></i></a>
+                    <a href="#" class="facebook"><i class="bx bxl-facebook"></i></a>
+                    <a href="#" class="messenger"><i class="bx bxl-messenger"></i></a>
+                    <a href="#" class="google-plus"><i class="bx bx-mail-send"></i></a>
                     <a href="tel:+0833229121" class="phone"><i class="bx bx-phone-call"></i></a>
                 </div>
             </div>

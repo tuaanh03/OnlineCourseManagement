@@ -39,7 +39,7 @@
         <div class="widget stick-widget">
             <h4 class="widget-title">Thao tác</h4>
             <ul class="naves">
-                @if (Model.isOwner(uLogin.MaNd))
+                @if (Model.isOwner(uLogin.MaNd) || uLogin.MaLoai.Equals("02"))
                 {
                     <li>
                         <i class="fa fa-cog"></i>
@@ -49,12 +49,12 @@
                         <i class="fa fa-cogs"></i>
                         <a href="~/courses/exam/list/@Model.MaLop">Quản lý bài thi</a>
                     </li>
-                    <li onclick="setTKPostAndMems('@Model.MaLop')">
+                   @*  <li onclick="setTKPostAndMems('@Model.MaLop')">
                         <i class="fa fa-bar-chart-o"></i>
                         <a>Thống kê</a>
-                    </li>
+                    </li> *@
                 }
-                else
+                @* else
                 {
                     <li>
                         <i class="fa fa-flag"></i>
@@ -64,15 +64,15 @@
                         <i class="ti-medall"></i>
                         <a>Đánh giá lớp</a>
                     </li>
-                }
+                } *@
                 <li onclick="getLink('@Model.MaLop')">
                     <i class="ti-sharethis-alt"></i>
                     <a>Chia sẻ lớp học</a>
                 </li>
-                <li>
+                @* <li>
                     <i class="ti-power-off"></i>
                     <a onclick="dangxuat()">Đăng xuất</a>
-                </li>
+                </li> *@
             </ul>
         </div>
     </aside>

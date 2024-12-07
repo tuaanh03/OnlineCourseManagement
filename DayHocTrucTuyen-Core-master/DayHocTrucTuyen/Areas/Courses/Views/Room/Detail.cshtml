@@ -93,8 +93,8 @@ else
                             <!-- Room content -->
                             <div class="col-lg-6">
                                 <!-- Nếu lớp học đang hoạt động thì có thể đăng bài-->
-                                @if (Model.TrangThai)
-                                {
+                                @if (Model.TrangThai && Model.isOwner(uLogin.MaNd))
+                                {   
                                     <div class="central-meta postbox">
                                         <span class="create-post tran-bottom">Bài đăng mới</span>
                                         <div class="new-postbox">
@@ -560,7 +560,7 @@ else
 }
 
 <!-- Đề xuất khóa học -->
-<section>
+@* <section>
     <div class="gap2 gray-bg">
         <div class="container-fluid">
             <div class="row">
@@ -593,7 +593,7 @@ else
             </div>
         </div>
     </div>
-</section>
+</section> *@
 
 <!--Popup xem hoặc tải pdf-->
 <div class="modal fade" id="myChoosePDF">

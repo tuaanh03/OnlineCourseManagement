@@ -13,7 +13,7 @@ namespace DayHocTrucTuyen.Controllers
         DayHocTrucTuyenContext db = new DayHocTrucTuyenContext();
 
         //Trang chủ hệ thống
-        [AllowAnonymous]
+        
         [Route("{id?}", Name = "ShotLink"), Route("/default/index", Name = "default")]
         public IActionResult Index(string? id)  
         {

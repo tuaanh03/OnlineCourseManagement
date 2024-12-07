@@ -7,6 +7,8 @@
     {
         uLogin = new NguoiDung().getNguoiDung(User.Claims.First().Value);
     }
+
+
 }
 
 <!DOCTYPE html>
@@ -59,7 +61,7 @@
                 <ul>
                     <li><a class="@ViewBag.Index" href="/">Trang chủ</a></li>
                     @* <li><a class="@ViewBag.ThongTin" href="">Thông tin</a></li> *@
-                    <li><a class="@ViewBag.KhoaHoc" href="~/Default/Courses">Khóa học</a></li>
+                    <li><a class="@ViewBag.KhoaHoc" href="~/courses/room/list">Lớp học của bạn</a></li>
                     @* <li><a class="@ViewBag.SuKien" href="">Sự kiện</a></li> *@
                     @*<li class="dropdown">
                     <a href="#"><span>Drop Down</span> <i class="bi bi-chevron-down"></i></a>
@@ -99,10 +101,12 @@
                         <ul class="dropdown-menu">
                             <li>
                                 @if (uLogin.MaLoai != null && uLogin.MaLoai.Equals("01"))
-                                {
+                                {   
                                     <a href="~/admin/user/list" class="dropdown-item"><i class="bi bi-grid"> Admin</i></a>
                                 }
-                                <a href="~/user/manage/index" class="dropdown-item"><i class="bi bi-grid"> Trang quản trị</i></a>
+                                <a href="~/profile/info/@uLogin.MaNd" class="dropdown-item"><i class="ti-user"></i>Thông tin cá nhân</a>
+                                @*  *@
+                               
                                 <button type="button" id="logoutAccount" class="dropdown-item text-danger" onclick="dangxuat()"><i class="bi bi-power"> Đăng xuất</i></button>
                             </li>
                         </ul>
