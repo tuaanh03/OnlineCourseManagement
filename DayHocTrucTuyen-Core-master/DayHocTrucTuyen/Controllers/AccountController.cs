@@ -19,8 +19,16 @@ namespace DayHocTrucTuyen.Controllers
         [AllowAnonymous]
         public IActionResult Login(string? ReturnUrl)
         {
+
             LoginModel loginModel = new LoginModel();
-            loginModel.ReturnUrl = string.IsNullOrEmpty(ReturnUrl) ? "/" : ReturnUrl;
+            //var user = db.NguoiDung;
+            
+                loginModel.ReturnUrl = string.IsNullOrEmpty(ReturnUrl) ? "/" : ReturnUrl;
+
+
+            //loginModel.ReturnUrl = string.IsNullOrEmpty(ReturnUrl) ? "/admin/user/list" : ReturnUrl;
+            //else loginModel.ReturnUrl =  "/" ;
+            //loginModel.ReturnUrl = "/"; 
             ViewBag.members = db.NguoiDungs.Count();
             ViewBag.classroom = db.LopHocs.Count();
             return View(loginModel);

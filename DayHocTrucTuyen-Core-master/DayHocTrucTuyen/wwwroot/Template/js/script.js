@@ -3031,7 +3031,7 @@ $('#form-change-pass').on('submit', () => {
 //Hàm đăng xuất
 function dangxuat() {
     $.getJSON('/account/logout', function (data) {
-        location.replace('/');
+        location.replace('/account/login');
     })
 }
 
