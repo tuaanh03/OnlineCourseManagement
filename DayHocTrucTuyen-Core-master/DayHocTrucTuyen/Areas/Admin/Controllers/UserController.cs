@@ -165,6 +165,9 @@ namespace DayHocTrucTuyen.Areas.Admin.Controllers
             {
                 result += "<button data-toggle=\"tooltip\" title=\"Mở khóa\" class=\"pd-setting-ed pressed-size mt-1\" onclick=\"setUserLock(\'" + ma + "\', this)\" ><i data-toggle=\"modal\" class=\"fa fa-unlock\" aria-hidden=\"true\"></i></button>";
             }
+
+            // Nút cấp quyền giáo viên
+            result += "<button data-toggle=\"tooltip\" title=\"Cấp quyền giáo viên\" class=\"pd-setting-ed mt-1\" onclick=\"GrantTeacherPermission(\'" + ma + "\')\"><i class=\"fa fa-graduation-cap\" aria-hidden=\"true\"></i></button>";
             return result;
         }
 
@@ -182,6 +185,27 @@ namespace DayHocTrucTuyen.Areas.Admin.Controllers
 
             return Json(new { tt = user.TrangThai, thaoTac = customThaoTac(user.MaNd, user.TrangThai) });
         }
+        //Cấp quyền giáo viên
+        [HttpPost]
+        public async Task<IActionResult> GrantTeacherPermission(string ma)
+        {
+            var user = await db.NguoiDungs.FirstOrDefaultAsync(x => x.MaNd == ma);
+            if (user == null)
+            {
+                return Json(new { success = false, message = "Người dùng không tồn tại!" });
+            }
+
+            if (user.MaLoai == "02")
+            {
+                return Json(new { success = false, message = "Người dùng đã là giáo viên!" });
+            }
+
+            user.MaLoai = "02"; // Mã giáo viên
+            db.SaveChanges();
+
+            return Json(new { success = true });
+        }
+
         #endregion Quản lý người dùng
 
         #region Phê duyệt người dùng

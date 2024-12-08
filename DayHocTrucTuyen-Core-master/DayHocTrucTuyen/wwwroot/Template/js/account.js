@@ -49,7 +49,7 @@ function dangky() {
 }
 
 //Hàm đăng nhập
-function dangnhap() {
+/*function dangnhap() {
     var remember = document.getElementById('rememberLogin');
     $.getJSON('/account/getlogin' + '?email=' + $('#emailLogin').val() + '&pass=' + $('#passLogin').val() + '&re=' + remember.checked, function (data) {
         if (data.tt) {
@@ -62,7 +62,35 @@ function dangnhap() {
         }
     })
 }
+*/
+// Hàm đăng nhập
+function dangnhap() {
+    var remember = document.getElementById('rememberLogin');
+    var gRecaptchaResponse = grecaptcha.getResponse(); // Lấy token reCAPTCHA
 
+    if (!gRecaptchaResponse) {
+        // Hiển thị thông báo nếu chưa xác nhận reCAPTCHA
+        document.getElementById('erroLogin').innerHTML = "Vui lòng xác nhận bạn không phải là robot!";
+        $('#erroLogin').show('slow');
+        $('#erroLogin').delay(3000).hide('slow');
+        return;
+    }
+
+    $.getJSON('/account/getlogin', {
+        email: $('#emailLogin').val(),
+        pass: $('#passLogin').val(),
+        re: remember.checked,
+        gRecaptchaResponse: gRecaptchaResponse // Gửi token reCAPTCHA
+    }, function (data) {
+        if (data.tt) {
+            window.location.href = $('#urlreturnLogin').val();
+        } else {
+            document.getElementById('erroLogin').innerHTML = data.mess;
+            $('#erroLogin').show('slow');
+            $('#erroLogin').delay(3000).hide('slow');
+        }
+    });
+}
 //Hàm đăng xuất
 function dangxuat() {
     $.getJSON('/account/logout', function (data) {
