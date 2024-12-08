@@ -21,7 +21,8 @@
     <link rel="stylesheet" href="~/Template/css/color.css" asp-append-version="true" />
     <link rel="stylesheet" href="~/Template/css/responsive.css" asp-append-version="true" />
     <link rel="stylesheet" href="~/Template/css/toastr.css" asp-append-version="true" />
-
+    @*   capcha *@
+    <script src="https://www.google.com/recaptcha/api.js" async defer></script>
 </head>
 <body>
     <!-- Loading animation -->
@@ -70,5 +71,20 @@
     <script src="~/Template/js/main.min.js" asp-append-version="true"></script>
     <script src="~/Template/js/account.js" asp-append-version="true"></script>
     <script src="~/Template/js/toastr.js" asp-append-version="true"></script>
+    <script src="https://www.google.com/recaptcha/api.js?onload=onloadCallback&render=explicit"
+            async defer>
+    </script>
+    <script>
+             var onloadCallback = function () {
+            grecaptcha.render('recapcha', {
+                'sitekey': '6LdFFZUqAAAAABfQg8U59JVhCTj_StxPpWwvV8RE',
+                'callback': function (reponse) {
+                       console.log("Captcha Token:", reponse); // In ra token trong console
+                    // $("#Capcha").val(reponse);
+                       document.getElementById('Capcha').value = response;
+                }
+            });
+        };
+    </script>
 </body>
 </html>

@@ -19,9 +19,11 @@
             <label class="label-input" id="lblpassLogin">Mật khẩu</label>
             <input type="checkbox" id="rememberLogin"><label style="padding-top: 0" for="rememberLogin" >Nhớ đăng nhập</label>
             <input type="hidden" value="@Model.ReturnUrl" id="urlreturnLogin" />
+            <input type="hidden" id="Capcha" name="Capcha" value=""/>
             <div class="col-12 alert alert-danger" style="display: none" id="erroLogin">
                 Lỗi đăng nhập !
             </div>
+            <div id="recapcha" data-sitekey="6LdFFZUqAAAAABfQg8U59JVhCTj_StxPpWwvV8RE"></div>
             <button type="submit" class="login-register" id="submitLogin" data-ripple="">Đăng nhập</button>
             <a class="forgot underline" href="/account/forgotpassword" title="">Quên mật khẩu?</a>
         </form>

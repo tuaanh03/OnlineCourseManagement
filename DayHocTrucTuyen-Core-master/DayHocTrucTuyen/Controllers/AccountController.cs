@@ -1,11 +1,14 @@
 ﻿using DayHocTrucTuyen.Areas.User.Controllers;
 using DayHocTrucTuyen.Models;
 using DayHocTrucTuyen.Models.Entities;
+using DayHocTrucTuyen.Service;
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using Owl.reCAPTCHA.v2;
+using Owl.reCAPTCHA;
 using System.Net;
 using System.Security.Claims;
 
@@ -14,6 +17,16 @@ namespace DayHocTrucTuyen.Controllers
     public class AccountController : Controller
     {
         DayHocTrucTuyenContext db = new DayHocTrucTuyenContext();
+        //private readonly GoogleReCaptchaService _reCaptchaService;
+        private readonly IreCAPTCHASiteVerifyV2 _siteVerify;
+        public AccountController(IreCAPTCHASiteVerifyV2 siteVerify)
+        {
+            _siteVerify = siteVerify ?? throw new ArgumentNullException(nameof(siteVerify));
+        }
+        //public AccountController(GoogleReCaptchaService reCaptchaService)
+        //{
+        //    _reCaptchaService = reCaptchaService ?? throw new ArgumentNullException(nameof(reCaptchaService));
+        //}
 
         //Trang đăng nhập
         [AllowAnonymous]
@@ -97,8 +110,22 @@ namespace DayHocTrucTuyen.Controllers
 
         //Gọi đăng nhập
         [AllowAnonymous]
-        public async Task<IActionResult> getLogin(string email, string pass, bool re)
+        public async Task<IActionResult> getLogin(string email, string pass, bool re, string capcha)
         {
+            //if (string.IsNullOrEmpty(loginModel.Capcha))
+            //{
+            //    return Json(new { tt = false, mess = "Bạn chưa xác nhận Capcha" });
+            //}
+            var response = await _siteVerify.Verify(new reCAPTCHASiteVerifyRequest
+            {
+                Response = capcha,   
+                RemoteIp = HttpContext.Connection.RemoteIpAddress.ToString()
+            });
+            if (response == null|| !response.Success )
+            {
+                return Json(new { tt = false, mess = $"{Response}" });
+            }
+
             var login = await setLogin(email, pass, re, false);
             if (login == 2)
             {

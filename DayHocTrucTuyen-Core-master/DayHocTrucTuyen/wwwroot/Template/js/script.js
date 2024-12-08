@@ -3051,7 +3051,9 @@ function dangxuatadmin() {
         location.replace('/admin/user/login');
     })
 }
-
+function recapchaGooglev2() {
+   
+}
 //Mở popup đánh giá lớp
 $('.rating-room').on('click', () => {
     $('.popup-wraper4').addClass('active');

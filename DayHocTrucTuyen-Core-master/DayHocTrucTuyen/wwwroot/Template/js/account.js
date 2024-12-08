@@ -51,7 +51,7 @@ function dangky() {
 //Hàm đăng nhập
 function dangnhap() {
     var remember = document.getElementById('rememberLogin');
-    $.getJSON('/account/getlogin' + '?email=' + $('#emailLogin').val() + '&pass=' + $('#passLogin').val() + '&re=' + remember.checked, function (data) {
+    $.getJSON('/account/getlogin' + '?email=' + $('#emailLogin').val() + '&pass=' + $('#passLogin').val() + '&re=' + remember.checked + '&capcha='+ $('#Capcha').val() , function (data) {
         if (data.tt) {
             window.location.href = $('#urlreturnLogin').val();
         }

@@ -1,6 +1,9 @@
 using DayHocTrucTuyen.Models;
+using DayHocTrucTuyen.Service;
 using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Authorization;
+using Owl.reCAPTCHA;
+using Owl.reCAPTCHA.v2;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -22,7 +25,21 @@ builder.Services.AddScoped<IAuthorizationHandler, RolesAuthorizationHandler>();
 
 //Using SignalR chat
 builder.Services.AddSignalR();
+//Using recaptcha
+builder.Services.AddHttpClient<GoogleReCaptchaService>();
 
+
+builder.Services.AddreCAPTCHAV2(x =>
+{
+    x.SiteKey = "6LdFFZUqAAAAABfQg8U59JVhCTj_StxPpWwvV8RE";
+    x.SiteSecret = "6LdFFZUqAAAAAL-JKFgOrVDViKpUM8Rcbs9QZQOg";
+});
+//builder.Services.AddSingleton<IreCAPTCHASiteVerifyV2>(provider =>
+//{
+//    var configuration = provider.GetRequiredService<IConfiguration>();
+//    var secretKey = configuration["GoogleReCAPTCHA:SecretKey"];
+//    return new GoogleReCaptchaService(secretKey);
+//});
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
