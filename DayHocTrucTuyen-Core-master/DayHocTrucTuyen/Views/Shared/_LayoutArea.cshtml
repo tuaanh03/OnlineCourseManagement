@@ -57,7 +57,9 @@
                     <a class="" href="#menu"><i class="fa fa-align-justify"></i></a>
                 </span>
                 <span class="mh-text">
-                    <a title="" href="/"><img src="~/Content/Img/Resources/Logo.gif" alt="" style="width: 40px"></a>
+                
+                        <a title="" href="/"><img src="~/Content/Img/Resources/Logo.gif" alt="" style="width: 40px"></a>
+                    
                 </span>
             </div>
             <nav id="menu" class="res-menu">
@@ -100,19 +102,25 @@
             <div class="logo">
                 @if (userAccount.MaLoai == "01")
                 {
-                <a title="Trở về trang chủ" href="/"><img src="~/Content/Img/Resources/Logo.gif" alt="" style="width: 40px"></a>
+                <a title="Trở về trang chủ" href="/admin/user/list   "><img src="~/Content/Img/Resources/Logo.gif" alt="" style="width: 40px"></a>
                 }
+                else
+                {
+                    <a title="Trở về trang chủ" href="/"><img src="~/Content/Img/Resources/Logo.gif" alt="" style="width: 40px"></a>
+                }
+
             </div>
             <div class="top-area">
                 <div class="page-name">
                     <span>@ViewBag.Main</span>
                 </div>
+                  @if(userAccount.MaLoai!="01"){
                 <ul class="setting-area">
                     <li>
                         <a href="" title="Lớp học" data-ripple="">
                             <i class="fa fa-group"></i><em class="bg-purple">@userAccount.getJoinRoom()</em>
                         </a>
-                        @if (userAccount.getJoinRoom() == 0)
+                        @if (userAccount.getJoinRoom() ==0)
                         {
                             <div class="dropdowns">
                                 <span>Bạn chưa tham gia lớp học nào</span>
@@ -121,30 +129,32 @@
                         }
                         else
                         {
-                            <div class="dropdowns">
-                                <span>Bạn tham gia @userAccount.getJoinRoom() lớp học</span>
-                                <ul class="drops-menu">
-                                    @foreach (var r in userAccount.getListJoin())
-                                    {
-                                        <li>
-                                            <div>
-                                                <figure>
-                                                    <img class="wh-35" src="@r.getImage()" alt="@r.TenLop" />
-                                                </figure>
-                                                <div class="mesg-meta">
-                                                    <h6><a href="~/courses/room/detail/@r.MaLop" title="Đi đến lớp @r.TenLop">@r.TenLop</a></h6>
-                                                    <span><b>@r.getOwner().Ten</b> là giáo viên</span>
-                                                    <i>@r.getMembers() thành viên</i>
+                         
+                                <div class="dropdowns">
+                                    <span>Bạn tham gia @userAccount.getJoinRoom() lớp học</span>
+                                    <ul class="drops-menu">
+                                        @foreach (var r in userAccount.getListJoin())
+                                        {
+                                            <li>
+                                                <div>
+                                                    <figure>
+                                                        <img class="wh-35" src="@r.getImage()" alt="@r.TenLop" />
+                                                    </figure>
+                                                    <div class="mesg-meta">
+                                                        <h6><a href="~/courses/room/detail/@r.MaLop" title="Đi đến lớp @r.TenLop">@r.TenLop</a></h6>
+                                                        <span><b>@r.getOwner().Ten</b> là giáo viên</span>
+                                                        <i>@r.getMembers() thành viên</i>
+                                                    </div>
+                                                    <div class="add-del-friends">
+                                                        <i class="fa fa-group"></i>
+                                                    </div>
                                                 </div>
-                                                <div class="add-del-friends">
-                                                    <i class="fa fa-group"></i>
-                                                </div>
-                                            </div>
-                                        </li>
-                                    }
-                                </ul>
-                                <a href="~/courses/room/list" title="Danh sách lớp tham gia" class="more-mesg">Xem tất cả</a>
-                            </div>
+                                            </li>
+                                        }
+                                    </ul>
+                                    <a href="~/courses/room/list" title="Danh sách lớp tham gia" class="more-mesg">Xem tất cả</a>
+                                </div>
+                           
                         }
                     </li>
                     <li>
@@ -208,6 +218,7 @@
                         </div>
                     </li> *@
                 </ul>
+                }
                 <div class="user-img">
                     <h5>@userAccount.getFullName()</h5>
                     <img src="@userAccount.getImageAvt()" alt="" class="wh-45" />
