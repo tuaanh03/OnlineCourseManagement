@@ -14,6 +14,15 @@ namespace DayHocTrucTuyen.Controllers
     public class AccountController : Controller
     {
         DayHocTrucTuyenContext db = new DayHocTrucTuyenContext();
+        private async Task<bool> VerifyReCaptcha(string token)
+        {
+            var secretKey = "6Lfa65UqAAAAAItsqGkwZk5VQcJ6WAZ-9IlUwD1m"; // Thay YOUR_SECRET_KEY bằng Secret Key từ Google
+            var httpClient = new HttpClient();
+            var response = await httpClient.PostAsync($"https://www.google.com/recaptcha/api/siteverify?secret={secretKey}&response={token}", null);
+            var responseString = await response.Content.ReadAsStringAsync();
+            dynamic result = Newtonsoft.Json.JsonConvert.DeserializeObject(responseString);
+            return result.success == true;
+        }
 
         //Trang đăng nhập
         [AllowAnonymous]
@@ -105,8 +114,14 @@ namespace DayHocTrucTuyen.Controllers
 
         //Gọi đăng nhập
         [AllowAnonymous]
-        public async Task<IActionResult> getLogin(string email, string pass, bool re)
+        public async Task<IActionResult> getLogin(string email, string pass, bool re, string gRecaptchaResponse)
         {
+            // Kiểm tra reCAPTCHA
+            if (string.IsNullOrEmpty(gRecaptchaResponse) || !await VerifyReCaptcha(gRecaptchaResponse))
+            {
+                return Json(new { tt = false, mess = "Vui lòng xác nhận bạn không phải là robot!" });
+            }
+
             var login = await setLogin(email, pass, re, false);
             if (login == 2)
             {

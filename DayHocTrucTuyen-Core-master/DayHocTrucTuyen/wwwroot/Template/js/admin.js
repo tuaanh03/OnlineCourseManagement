@@ -127,6 +127,29 @@ $('#confirm-lock-user').on('click', function () {
     })
 })
 
+//Xử lý cấp quyền giáo viên
+function GrantTeacherPermission(maUser) {
+    if (confirm('Bạn có chắc chắn muốn cấp quyền giáo viên cho tài khoản này?')) {
+        $.ajax({
+            url: '/admin/user/grantteacherpermission',
+            type: 'POST',
+            data: { ma: maUser },
+            success: function (data) {
+                if (data.success) {
+                    getThongBao('success', 'Thành công', 'Cấp quyền giáo viên thành công!');
+                    $('#table-user-list').bootstrapTable('refresh');
+                } else {
+                    getThongBao('error', 'Lỗi', data.message || 'Cấp quyền giáo viên thất bại!');
+                }
+            },
+            error: function () {
+                getThongBao('error', 'Lỗi', 'Không thể gửi yêu cầu về máy chủ!');
+            }
+        });
+    }
+}
+
+
 //--------------------------------------------------------------------------
 
 //Xử lý trang quản lý lớp học

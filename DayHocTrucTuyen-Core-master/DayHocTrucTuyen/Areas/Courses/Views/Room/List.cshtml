@@ -142,7 +142,8 @@
                             </div>
                         </div>
                     }
-                    @if (uLogin.MaLoai.Equals("01") || uLogin.MaLoai.Equals("02"))
+                    @if (uLogin.MaLoai.Equals("01") || uLogin.MaLoai.Equals("02") || uLogin.MaLoai.Equals("03") )
+
                     {
                         <div class="forum-warper">
                             <div class="central-meta">
@@ -151,7 +152,10 @@
                                         <h5 class="create-post">Lớp của bạn</h5>
                                     </div>
                                     <div class="align-right">
-                                        <button class="addnewforum btn-outline-success create-room"><i class="fa fa-plus"></i> Thêm lớp học</button>
+                                        <button id="btn-create-room" class="addnewforum btn-outline-success create-room"><i class="fa fa-plus"></i> Thêm lớp học</button>
+                                    </div>
+                                    <div class="align-right">
+                                        <button id="btn-join-room" class="addnewforum btn-outline-success create-room"><i class="fa fa-plus"></i> Tham gia lớp học</button>
                                     </div>
                                 </div>
                                 @if (Model.Count == 0)
@@ -333,7 +337,7 @@
                         <div class="widget">
                             <h4 class="widget-title">Thống kê</h4>
                             <ul class="forum-static">
-                                @if(uLogin.MaLoai.Equals("02"))
+                                @if(uLogin.MaLoai.Equals("01") || uLogin.MaLoai.Equals("02"))
                                 {
                                     <li>
                                         <a title="">Quản lý lớp</a>
@@ -387,7 +391,7 @@
         </div>
     </div>
 </section>
-<div class="popup-wraper4">
+<div class="popup-wraper4" id="popup-create-room" style="display: none;">
     <div class="popup creat-group">
         <span class="popup-closed"><i class="ti-close"></i></span>
         <div class="popup-meta">
@@ -451,6 +455,68 @@
     </div>
 </div><!-- Thêm mới lớp học -->
 
+<div class="popup-wraper4" id="popup-join-room" style="display: none;">
+    <div class="popup direct-mesg">
+        <span class="popup-closed"><i class="ti-close"></i></span>
+        <div class="popup-meta">
+            <div class="popup-head">
+                <h5>Tham gia lớp học <i title="Trợ giúp" id="get-help" class="fa fa-question-circle active" style="cursor: pointer"></i></h5>
+            </div>
+            <div class="dropdowns helps popup-get-help">
+                <span>Làm sao để thêm mới lớp học?</span>
+                <ul class="help-drop">
+                    
+                    <li><b>Mã lớp: </b>Là bắt buộc nhập. Mã lớp sẽ do giáo viên của bạn cấp.</li>
+                    
+                </ul>
+            </div>
+            <div class="group-adding">
+                <div class="room-group">
+                    @* <div class="change-photo">
+                        <figure><img id="img-bg-room" src="~/Content/Img/roomCover/cover-default.jpg" alt=""></figure>
+                        <div class="edit-img">
+                            <div class="edit-phto">
+                                <label class="fileContainer">
+                                    <i class="fa fa-camera-retro"></i>
+                                    <span id="lbl-img-room" style="text-transform:none">Chưa có ảnh nào được chọn</span>
+                                    <input id="img-room" type="file" accept=".jpg, .png, .jpeg">
+                                </label>
+                            </div>
+                        </div>
+                    </div> *@
+                    <form id="form-join-room"  method="post" enctype="multipart/form-data">
+                        <div class="input-group mb-2 my-form">
+                            <div class="input-group-prepend">
+                                <div class="input-group-text text-label">Mã lớp</div>
+                            </div>
+                            <input type="text" name="search-room-id" class="form-control form-join-room" id="inp-room-id" required maxlength="40" placeholder="Nhập mã lớp học..." title="Ví dụ: Lập Trình Web">
+                        </div>
+                        @* <div class="input-group mb-2 my-form">
+                            <div class="input-group-prepend">
+                                <div class="input-group-text text-label">Bí danh</div>
+                            </div>
+                            <input type="text" class="form-control form-join-room" id="inp-room-bd" pattern="[a-z,1-9]{1,20}" maxlength="20" placeholder="Nhập bí danh..." title="Ví dụ: laptrinhweb">
+                        </div>
+                        <div class="input-group mb-2 my-form">
+                            <div class="input-group-prepend">
+                                <div class="input-group-text text-label">Mô tả</div>
+                            </div>
+                            <textarea class="form-control form-join-room" maxlength="300" id="inp-room-mt" placeholder="Nhập mô tả cho lớp...." title="Ví dụ: Lớp dạy lập trình web chuyên sâu."></textarea>
+                        </div>
+                        <select id="room-create-tag" multiple name="native-select" placeholder="Chọn chủ đề cho lớp" data-search="true" data-silent-initial-value-set="true" data-max-values="2">
+                            @foreach (var tag in ViewData["Tag"] as List<Tag>)
+
+                            {
+                                <option value="@tag.MaTag">@tag.TenTag</option>
+                            }
+                        </select> *@
+                        <button type="submit" class="main-btn">Tham gia lớp học</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div><!-- Tìm kiếm lớp học -->
 @section ChildScript{
     <script>
         //Xử lý lấy tên thẻ vào select box
@@ -469,3 +535,24 @@
     <!-- Xử lý đề xuất tìm kiếm lớp học-->
     <script src="~/Template/js/search-room.js" asp-append-version="true"></script>
 }
+
+<script>
+    // Khi nhấn nút "Thêm lớp học"
+    document.getElementById('btn-create-room').addEventListener('click', function () {
+        document.getElementById('popup-create-room').style.display = 'block';  // Hiển thị popup "Thêm mới lớp học"
+        document.getElementById('popup-join-room').style.display = 'none';     // Ẩn popup "Tham gia lớp học"
+    });
+
+    // Khi nhấn nút "Tham gia lớp học"
+    document.getElementById('btn-join-room').addEventListener('click', function () {
+        document.getElementById('popup-join-room').style.display = 'block';    // Hiển thị popup "Tham gia lớp học"
+        document.getElementById('popup-create-room').style.display = 'none';   // Ẩn popup "Thêm mới lớp học"
+    });
+
+    // Đóng popup khi nhấn vào nút đóng
+    document.querySelectorAll('.popup-closed').forEach(function (closeButton) {
+        closeButton.addEventListener('click', function () {
+            this.closest('.popup-wraper4').style.display = 'none';
+        });
+    });
+</script>

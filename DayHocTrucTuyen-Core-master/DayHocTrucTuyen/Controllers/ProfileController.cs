@@ -73,6 +73,7 @@ namespace DayHocTrucTuyen.Controllers
             user.BiDanh = bd;
 
             db.SaveChanges();
+           
 
             return Json(new { tt = true });
         }

@@ -49,15 +49,23 @@ app.UseAuthorization();
 //Config Endpoint chat
 app.MapHub<ChatHub>($"/models/{nameof(ChatHub)}");
 
-//Config Map Route Areas
-app.MapAreaControllerRoute(
-    name: "MyAreas",
-    areaName: "Areas",
-    pattern: "{area:exists}/{controller=Home}/{action=Index}");
+app.UseEndpoints(endpoints =>
+{
+    endpoints.MapAreaControllerRoute(
+        name: "Admin",
+        areaName: "Admin",
+        pattern:"Admin/{controller=User}/{action=List}");
+    //Config Map Route Areas
+    endpoints.MapControllerRoute(
+        name: "areaRoute",
+        pattern: "{area:exists}/{controller}/{action}");
 
-//Default Map Route
-app.MapControllerRoute(
-    name: "default",
-    pattern: "{controller=Default}/{action=Index}");
+    //Default Map Route
+    endpoints.MapControllerRoute(
+        name: "default",
+        pattern: "{controller=Default}/{action=Index}");
+});
+
+
 
 app.Run();

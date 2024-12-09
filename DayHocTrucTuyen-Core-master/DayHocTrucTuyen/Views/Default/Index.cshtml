@@ -1,6 +1,6 @@
 ﻿@{
     ViewBag.Title = "Trang chủ";
-    ViewBag.Index = "active";
+    ViewBag.Index = "active";   
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 @using DayHocTrucTuyen.Models.Entities
@@ -67,14 +67,14 @@
             <div class="row">
                 <div class="col-lg-4 d-flex align-items-stretch">
                     <div class="content">
-                        <h3>Lý do chọn Dạy Học Trực Tuyến?</h3>
+                        <h3>Lý do câu lạc bộ Học Thuật lại có website</h3>
                         <p>
                             Môi trường tươi trẻ, thân thiện. Sử dụng công nghệ và kỹ thuật tiên tiến trong quá trình giảng dạy. Có đội ngũ giáo viên có trình độ chuyên môn cao.
                             Có chế độ chăm sóc khách hàng chất lượng cao, luôn đặt trải nghiệm và cảm xúc của khách hàng lên hàng đầu.
                         </p>
-                        <div class="text-center">
+                        @* <div class="text-center">
                             <a href="~/account/register" class="more-btn">Đăng ký ngay <i class="bx bx-chevron-right"></i></a>
-                        </div>
+                        </div> *@
                     </div>
                 </div>
                 <div class="col-lg-8 d-flex align-items-stretch" data-aos="zoom-in" data-aos-delay="100">
@@ -97,7 +97,7 @@
                             <div class="col-xl-4 d-flex align-items-stretch">
                                 <div class="icon-box mt-4 mt-xl-0">
                                     <i class="bx bx-donate-heart"></i>
-                                    <h4>Nhân viên</h4>
+                                    <h4>Đội ngũ giảng viên</h4>
                                     <p>Thân thiện, luôn luôn lắng nghe ý kiến khách hàng và sẵn sàng thay đổi.</p>
                                 </div>
                             </div>
@@ -107,7 +107,7 @@
             </div>
         </div>
     </section><!-- End Why Us Section -->
-    <!-- ======= Features Section ======= -->
+   @*  <!-- ======= Features Section ======= -->
     <section id="features" class="features">
         <div class="container" data-aos="fade-up">
             <div class="row" data-aos="zoom-in" data-aos-delay="100">
@@ -171,17 +171,17 @@
                         <h3><a href="">Trí tuệ nhân tạo</a></h3>
                     </div>
                 </div>
-                <div class="col-lg-3 col-md-4 mt-4">
+                 <div class="col-lg-3 col-md-4 mt-4">
                     <div class="icon-box">
                         <i class="ri-music-2-fill" style="color: #ff5828;"></i>
                         <h3><a href="">Âm nhạc</a></h3>
                     </div>
-                </div>
+                </div> 
             </div>
         </div>
-    </section><!-- End Features Section -->
+    </section><!-- End Features Section --> *@
     <!-- ======= Popular Courses Section ======= -->
-    <section id="popular-courses" class="courses">
+   @*  <section id="popular-courses" class="courses">
         <div class="container" data-aos="fade-up">
             <div class="section-title">
                 <h2>Khóa học</h2>
@@ -229,5 +229,5 @@
                 }
             </div>
         </div>
-    </section><!-- End Popular Courses Section -->
+    </section><!-- End Popular Courses Section --> *@
 </main><!-- End #main -->

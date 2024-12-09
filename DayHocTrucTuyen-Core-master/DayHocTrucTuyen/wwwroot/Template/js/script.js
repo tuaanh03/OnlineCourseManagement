@@ -1273,7 +1273,8 @@ jQuery(document).ready(function ($) {
 function getLink(link) {
     var $temp = $("<input>");
     $("body").append($temp);
-    $temp.val('https://localhost:44354/' + link).select();
+    /*$temp.val('https://localhost:44354/' + link).select();*/
+    $temp.val(link).select();
     document.execCommand("copy");
     $temp.remove();
 
@@ -1867,6 +1868,16 @@ $('#form-search-exam').on('submit', function () {
     location.replace('/courses/exam/list/' + document.getElementById('search-exam-room').title + '?q=' + document.getElementById('search-exam-name').value);
 })
 
+//Tìm kiếm phòng học
+$('#form-join-room').on('submit', function (event) {
+    event.preventDefault();
+    const roomId = document.getElementById('inp-room-id').value.trim();
+    if (!roomId) {
+        getThongBao('error', 'Lỗi !', 'Bạn chưa nhập mã lớp học.');
+        return;
+    }
+    location.replace('/courses/room/detail/' + roomId);
+});
 //Xử lý chỉnh sửa bài thi
 $('#form-edit-exam').on('submit', function () {
     event.preventDefault();
@@ -3031,7 +3042,7 @@ $('#form-change-pass').on('submit', () => {
 //Hàm đăng xuất
 function dangxuat() {
     $.getJSON('/account/logout', function (data) {
-        location.replace('/account/login');
+        location.replace('/');
     })
 }
 

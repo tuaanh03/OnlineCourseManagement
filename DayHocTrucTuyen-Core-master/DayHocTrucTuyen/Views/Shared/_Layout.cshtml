@@ -7,6 +7,8 @@
     {
         uLogin = new NguoiDung().getNguoiDung(User.Claims.First().Value);
     }
+
+
 }
 
 <!DOCTYPE html>
@@ -58,9 +60,9 @@
             <nav id="navbar" class="navbar order-last order-lg-0">
                 <ul>
                     <li><a class="@ViewBag.Index" href="/">Trang chủ</a></li>
-                    <li><a class="@ViewBag.ThongTin" href="">Thông tin</a></li>
-                    <li><a class="@ViewBag.KhoaHoc" href="~/default/courses">Khóa học</a></li>
-                    <li><a class="@ViewBag.SuKien" href="">Sự kiện</a></li>
+                    @* <li><a class="@ViewBag.ThongTin" href="">Thông tin</a></li> *@
+                    <li><a class="@ViewBag.KhoaHoc" href="~/courses/room/list">Lớp học của bạn</a></li>
+                    @* <li><a class="@ViewBag.SuKien" href="">Sự kiện</a></li> *@
                     @*<li class="dropdown">
                     <a href="#"><span>Drop Down</span> <i class="bi bi-chevron-down"></i></a>
                     <ul>
@@ -80,7 +82,7 @@
                     <li><a href="#">Drop Down 4</a></li>
                     </ul>
                     </li>*@
-                    <li><a class="@ViewBag.LienHe" href="~/default/contact">Liên hệ</a></li>
+                    <li><a class="@ViewBag.LienHe" href="~/Default/Contact">Liên hệ</a></li>
                 </ul>
                 <i class="bi bi-list mobile-nav-toggle"></i>
             </nav><!-- .navbar -->
@@ -99,10 +101,13 @@
                         <ul class="dropdown-menu">
                             <li>
                                 @if (uLogin.MaLoai != null && uLogin.MaLoai.Equals("01"))
-                                {
+                                {   
                                     <a href="~/admin/user/list" class="dropdown-item"><i class="bi bi-grid"> Admin</i></a>
                                 }
-                                <a href="~/user/manage/index" class="dropdown-item"><i class="bi bi-grid"> Trang quản trị</i></a>
+                                <a href="~/profile/update/@uLogin.MaNd" class="dropdown-item"><i class="ti-user"></i>Thông tin cá nhân</a>
+                            @* <li><a href="/profile/update/@uLogin.MaNd" title=""><i class="ti-pencil-alt"></i>Thông tin cá nhân</a></li> *@
+                                @*  *@
+                               
                                 <button type="button" id="logoutAccount" class="dropdown-item text-danger" onclick="dangxuat()"><i class="bi bi-power"> Đăng xuất</i></button>
                             </li>
                         </ul>
@@ -135,17 +140,16 @@
         <div class="container d-md-flex py-4">
 
             <div class="me-md-auto text-center text-md-start">
-                <b>Triệu Nguyễn Khánh Băng</b>
-                <br />
-                B1809328
+                <b>Huỳnh Duy Khang</b>
+                
             </div>
-            <div class="social-links text-center text-md-right pt-3 pt-md-0">
+            @* <div class="social-links text-center text-md-right pt-3 pt-md-0">
                 <a href="https://instagram.com/tnk_bang" class="instagram"><i class="bx bxl-instagram"></i></a>
                 <a href="https://fb.com/tnkbang" class="facebook"><i class="bx bxl-facebook"></i></a>
                 <a href="https://m.me/tnkbang" class="messenger"><i class="bx bxl-messenger"></i></a>
                 <a href="mailto:bangb1809328@student.ctu.edu.vn" class="google-plus"><i class="bx bx-mail-send"></i></a>
                 <a href="tel:+0833229121" class="phone"><i class="bx bx-phone-call"></i></a>
-            </div>
+            </div> *@
         </div>
     </footer><!-- End Footer -->
 

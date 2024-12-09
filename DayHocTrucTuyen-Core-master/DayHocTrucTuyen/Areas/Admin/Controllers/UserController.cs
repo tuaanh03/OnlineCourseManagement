@@ -1,18 +1,31 @@
 ﻿using DayHocTrucTuyen.Areas.Admin.Models;
 using DayHocTrucTuyen.Areas.User.Controllers;
+using DayHocTrucTuyen.Models;
 using DayHocTrucTuyen.Models.Entities;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 
+
 namespace DayHocTrucTuyen.Areas.Admin.Controllers
 {
-    [Area(nameof(Admin))]
+    [Area("Admin")]
     [Route("admin/[controller]/[action]/{id?}")]
     [Authorize(Roles = "01")]
     public class UserController : Controller
     {
         DayHocTrucTuyenContext db = new DayHocTrucTuyenContext();
+
+        [AllowAnonymous]
+        public ActionResult Login(string? ReturnUrl)
+        {
+            LoginModel loginModel = new LoginModel();
+            loginModel.ReturnUrl = string.IsNullOrEmpty(ReturnUrl) ? "/admin/user/list" : ReturnUrl;
+            ViewBag.members = db.NguoiDungs.Count();
+            ViewBag.classroom = db.LopHocs.Count();
+            return View(loginModel);
+        }
+
 
         #region Quản lý người dùng
         //Trang danh sách người dùng
@@ -152,6 +165,9 @@ namespace DayHocTrucTuyen.Areas.Admin.Controllers
             {
                 result += "<button data-toggle=\"tooltip\" title=\"Mở khóa\" class=\"pd-setting-ed pressed-size mt-1\" onclick=\"setUserLock(\'" + ma + "\', this)\" ><i data-toggle=\"modal\" class=\"fa fa-unlock\" aria-hidden=\"true\"></i></button>";
             }
+
+            // Nút cấp quyền giáo viên
+            result += "<button data-toggle=\"tooltip\" title=\"Cấp quyền giáo viên\" class=\"pd-setting-ed mt-1\" onclick=\"GrantTeacherPermission(\'" + ma + "\')\"><i class=\"fa fa-graduation-cap\" aria-hidden=\"true\"></i></button>";
             return result;
         }
 
@@ -169,6 +185,27 @@ namespace DayHocTrucTuyen.Areas.Admin.Controllers
 
             return Json(new { tt = user.TrangThai, thaoTac = customThaoTac(user.MaNd, user.TrangThai) });
         }
+        //Cấp quyền giáo viên
+        [HttpPost]
+        public async Task<IActionResult> GrantTeacherPermission(string ma)
+        {
+            var user = await db.NguoiDungs.FirstOrDefaultAsync(x => x.MaNd == ma);
+            if (user == null)
+            {
+                return Json(new { success = false, message = "Người dùng không tồn tại!" });
+            }
+
+            if (user.MaLoai == "02")
+            {
+                return Json(new { success = false, message = "Người dùng đã là giáo viên!" });
+            }
+
+            user.MaLoai = "02"; // Mã giáo viên
+            db.SaveChanges();
+
+            return Json(new { success = true });
+        }
+
         #endregion Quản lý người dùng
 
         #region Phê duyệt người dùng

@@ -1,4 +1,4 @@
-﻿@model NguoiDung
+﻿    @model NguoiDung
 @using DayHocTrucTuyen.Models.Entities
 @{
     ViewBag.Title = "Cập nhật thông tin";
@@ -56,7 +56,7 @@
                                             <select class="inp-update-user" required id="user-edit-gt" name="native-select" placeholder="Chọn giới tính" data-search="false" data-silent-initial-value-set="true" data-max-values="3">
                                                 @{
                                                     string[] tempGT = new string[] {"Nam", "Nữ", "Khác"};
-                                                    for (var i = 0; i < tempGT.Length; i++)
+                                                    for (var i = 0; i < tempGT.Length; i++)     
                                                     {
                                                         int ss = i + 1;
                                                         if (ss == Model.GioiTinh)
