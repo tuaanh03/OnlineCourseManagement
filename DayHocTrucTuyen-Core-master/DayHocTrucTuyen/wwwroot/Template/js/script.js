@@ -3045,6 +3045,11 @@ function dangxuat() {
         location.replace('/');
     })
 }
+function dangxuatadmin() {
+    $.getJSON('/account/logout', function (data) {
+        location.replace('/admin/user/login');
+    })
+}
 
 //Mở popup đánh giá lớp
 $('.rating-room').on('click', () => {

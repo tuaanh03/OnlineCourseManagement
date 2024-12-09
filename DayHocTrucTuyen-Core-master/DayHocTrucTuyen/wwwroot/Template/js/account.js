@@ -98,7 +98,11 @@ function dangxuat() {
         location.replace('/admin/user/login');
     })
 }
-
+function dangxuatadmin() {
+    $.getJSON('/account/logout', function (data) {
+        location.replace('/admin/user/login');
+    })
+}
 //Bắt sự kiện khi nhấn đăng nhập
 $('#formLogin').on('submit', function () {
     event.preventDefault();
