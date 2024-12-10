@@ -100,7 +100,12 @@
             <div class="logo">
                 @if (userAccount.MaLoai == "01")
                 {
-                <a title="Trở về trang chủ" href="/"><img src="~/Content/Img/Resources/Logo.gif" alt="" style="width: 40px"></a>
+                    <a title="Trở về trang chủ" href="/admin/user/list"><img src="~/Content/Img/Resources/Logo.gif" alt="" style="width: 40px"></a>
+                }
+                else
+                {
+                    <a title="Trở về trang chủ" href="/"><img src="~/Content/Img/Resources/Logo.gif" alt="" style="width: 40px"></a>
+
                 }
             </div>
             <div class="top-area">
@@ -108,6 +113,7 @@
                     <span>@ViewBag.Main</span>
                 </div>
                 <ul class="setting-area">
+                     @if(userAccount.MaLoai!="01") {
                     <li>
                         <a href="" title="Lớp học" data-ripple="">
                             <i class="fa fa-group"></i><em class="bg-purple">@userAccount.getJoinRoom()</em>
@@ -123,7 +129,8 @@
                             </div>
                         }
                         else
-                        {
+                        { 
+                           
                             <div class="dropdowns">
                                 <span>Bạn tham gia @userAccount.getJoinRoom() lớp học</span>
                                 <ul class="drops-menu">
@@ -149,7 +156,9 @@
                                 <a href="~/courses/room/list" title="Danh sách lớp tham gia" class="more-mesg">Xem tất cả</a>
                             </div>
                         }
+                        
                     </li>
+                     }
                     <li>
                        @*  @if(thongbao.getSLThongBaoChuaXem() == 0)
                         {
