@@ -149,7 +149,8 @@ namespace DayHocTrucTuyen.Areas.Admin.Controllers
         //Hàm xử lý các button thao tác, vì bootstrap-table không hỗ trợ update với formatter row nên phải dùng cách này
         public string customThaoTac(string ma, bool tt)
         {
-            var result = "<button data-toggle=\"tooltip\" title=\"Xem\" class=\"pd-setting-ed pressed-size ml-1 mr-1\" onclick=\"window.location.href=\'/courses/room/detail/" + ma + "\'\"><i class=\"fa fa-eye\" aria-hidden=\"true\"></i></button>";
+            var result = " ";
+            /*var result = "<button data-toggle=\"tooltip\" title=\"Xem\" class=\"pd-setting-ed pressed-size ml-1 mr-1\" onclick=\"window.location.href=\'/courses/room/detail/" + ma + "\'\"><i class=\"fa fa-eye\" aria-hidden=\"true\"></i></button>";*/
             if (tt)
             {
                 result += "<button data-toggle=\"tooltip\" title=\"Khóa\" class=\"pd-setting-ed mt-1\" onclick=\"setRoomLock(\'" + ma + "\', this)\" ><i data-toggle=\"modal\" class=\"fa fa-lock\" aria-hidden=\"true\"></i></button>";

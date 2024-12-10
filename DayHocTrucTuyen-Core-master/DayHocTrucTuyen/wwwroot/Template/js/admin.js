@@ -176,6 +176,7 @@ $roomlist.bootstrapTable({
         sortable: true,
         title: 'Giá tiền',
         formatter: (value, row, index) => { return row.giaTien + " VNĐ" },
+        visible: false
     }, {
         field: 'moTa',
         title: 'Mô tả',
