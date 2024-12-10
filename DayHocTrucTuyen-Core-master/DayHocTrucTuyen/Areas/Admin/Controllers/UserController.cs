@@ -156,7 +156,9 @@ namespace DayHocTrucTuyen.Areas.Admin.Controllers
         //Hàm xử lý các button thao tác, vì bootstrap-table không hỗ trợ update với formatter row nên phải dùng cách này
         public string customThaoTac(string ma, bool tt)
         {
-            var result = "<button data-toggle=\"tooltip\" title=\"Xem\" class=\"pd-setting-ed pressed-size ml-1 mr-1\" onclick=\"window.location.href=\'/profile/info/" + ma + "\'\"><i class=\"fa fa-eye\" aria-hidden=\"true\"></i></button>";
+            // Nút cấp quyền giáo viên
+            var result = "<button data-toggle=\"tooltip\" title=\"Cấp quyền giáo viên\" class=\"pd-setting-ed pressed-size ml-1 mr-1\" onclick=\"GrantTeacherPermission(\'" + ma + "\')\"><i class=\"fa fa-graduation-cap\" aria-hidden=\"true\"></i></button>";
+            /*var result = "<button data-toggle=\"tooltip\" title=\"Xem\" class=\"pd-setting-ed pressed-size ml-1 mr-1\" onclick=\"window.location.href=\'/profile/info/" + ma + "\'\"><i class=\"fa fa-eye\" aria-hidden=\"true\"></i></button>";*/
             if (tt)
             {
                 result += "<button data-toggle=\"tooltip\" title=\"Khóa\" class=\"pd-setting-ed mt-1\" onclick=\"setUserLock(\'" + ma + "\', this)\" ><i data-toggle=\"modal\" class=\"fa fa-lock\" aria-hidden=\"true\"></i></button>";
@@ -166,8 +168,7 @@ namespace DayHocTrucTuyen.Areas.Admin.Controllers
                 result += "<button data-toggle=\"tooltip\" title=\"Mở khóa\" class=\"pd-setting-ed pressed-size mt-1\" onclick=\"setUserLock(\'" + ma + "\', this)\" ><i data-toggle=\"modal\" class=\"fa fa-unlock\" aria-hidden=\"true\"></i></button>";
             }
 
-            // Nút cấp quyền giáo viên
-            result += "<button data-toggle=\"tooltip\" title=\"Cấp quyền giáo viên\" class=\"pd-setting-ed mt-1\" onclick=\"GrantTeacherPermission(\'" + ma + "\')\"><i class=\"fa fa-graduation-cap\" aria-hidden=\"true\"></i></button>";
+            
             return result;
         }
 

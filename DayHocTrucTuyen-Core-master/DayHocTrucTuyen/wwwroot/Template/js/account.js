@@ -88,7 +88,10 @@ function dangnhap() {
             document.getElementById('erroLogin').innerHTML = data.mess;
             $('#erroLogin').show('slow');
             $('#erroLogin').delay(3000).hide('slow');
-            grecaptcha.reset(); // Reset
+
+            // Reset reCAPTCHA
+            grecaptcha.reset(); // Yêu cầu xác minh lại reCAPTCHA@
+
         }
     });
 }
