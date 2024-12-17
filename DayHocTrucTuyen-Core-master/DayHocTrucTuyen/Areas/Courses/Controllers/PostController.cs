@@ -7,7 +7,7 @@ namespace DayHocTrucTuyen.Areas.Courses.Controllers
 {
     [Area(nameof(Courses))]
     [Route("courses/[controller]/[action]")]
-    [Authorize(Roles = "01,02")]
+    //[Authorize(Roles = "01,02")]
     public class PostController : Controller
     {
         // GET: Courses/Post
